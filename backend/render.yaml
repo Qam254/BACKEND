@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: fastfood-payment-backend
+    runtime: node
+    region: oregon
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: NODE_ENV
+        value: production
+      - key: EASYPAY_BASE_URL
+        value: https://api.easypay.co.tz/v1/payments
+      - key: EASYPAY_API_KEY
+        sync: false
+      - key: EASYPAY_SECRET_KEY
+        sync: false
+      - key: EASYPAY_WEBHOOK_SECRET
+        sync: false
+      - key: EASYPAY_DEFAULT_REFERENCE
+        value: COL20260109LINK01XYZ
+      - key: BEEM_API_KEY
+        sync: false
+      - key: BEEM_SECRET_KEY
+        sync: false
+      - key: BEEM_SOURCE_ADDR
+        value: INFO

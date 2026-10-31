@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.EWinger" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Set a solid background to prevent launch issues on some devices -->
+        <item name="android:windowBackground">@android:color/white</item>
+
+        <!-- Remove the system splash icon for Android 12+ (API 31+) -->
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@android:color/transparent</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@android:color/white</item>
+    </style>
+</resources>

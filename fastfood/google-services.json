@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "231589377823",
+    "project_id": "fast-food-5e4a8",
+    "storage_bucket": "fast-food-5e4a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231589377823:android:ef56cec9d2edbabea8222a",
+        "android_client_info": {
+          "package_name": "com.example.e_winger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT6wU_roAMT96LowFqpj1kxDd7FnOo2iQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Fast Food</string>
+    <string name="settings">Mipangilio</string>
+    <string name="account">Akaunti</string>
+    <string name="edit_profile">Hariri Wasifu</string>
+    <string name="security">Usalama</string>
+    <string name="notifications_style">Mtindo wa Arifa</string>
+    <string name="font_size">Ukubwa wa herufi</string>
+    <string name="bold_text">Maandishi mazito</string>
+    <string name="language">Lugha</string>
+    <string name="more">Zaidi</string>
+    <string name="customer_support">Huduma kwa Wateja</string>
+    <string name="about_fast_food">Kuhusu Fast Food</string>
+    <string name="privacy_policy">Sera ya Faragha</string>
+    <string name="english">Kiingereza</string>
+    <string name="swahili">Kiswahili</string>
+    <string name="back">Rudi</string>
+    <string name="search_hint">Tafuta chakula kitamu...</string>
+    <string name="my_orders">Maagizo Yangu</string>
+    <string name="wishlist">Mapendekezo</string>
+    <string name="shipping_address">Anwani ya Kusafirisha</string>
+    <string name="payment_methods">Njia za Malipo</string>
+    <string name="logout">Ondoka</string>
+    <string name="dark_mode">Hali ya Giza</string>
+
+    <!-- Checkout Section -->
+    <string name="finalize_order">Kamilisha Agizo</string>
+    <string name="delivery_details">Maelezo ya Uwasilishaji</string>
+    <string name="full_name">Jina Kamili</string>
+    <string name="location_area">Eneo (k.mf. Buza, Cheka)</string>
+    <string name="street_landmark">Jina la Mtaa / Alama</string>
+    <string name="house_unit">Namba ya Nyumba (Hiari)</string>
+    <string name="phone_number">Namba ya Simu</string>
+    <string name="order_summary">Muhtasari wa Agizo</string>
+    <string name="total_amount">Jumla</string>
+    <string name="payment_method">Njia ya Malipo</string>
+    <string name="mobile_payment">Malipo ya Simu (M-Pesa / Tigo Pesa / Airtel Money)</string>
+    <string name="cash_on_delivery">Lipa Unapopokea</string>
+    <string name="place_order">Agiza Sasa</string>
+    <string name="order_placed">Agizo Limetumwa!</string>
+    <string name="order_success_msg">Chakula chako kinaandaliwa na kitawasilishwa hivi karibuni.</string>
+    <string name="back_to_home">Rudi Nyumbani</string>
+
+    <!-- Notifications -->
+    <string name="notif_order_placed_title">Agizo Limetumwa kwa Mafanikio</string>
+    <string name="notif_order_placed_msg">Agizo lako la vitu %d limepokelewa.</string>
+    <string name="notif_order_placed_full">Maelezo ya Agizo:\nID ya Agizo: #%1$s\nJumla: TSH %2$s\nHali: Chakula Chako Kinaandaliwa\n\nKama kuna usumbufu wowote tafadhali wasiliana na huduma kwa wateja kwa namba 0612826255\n\nAsante kwa kuchagua Fast Food!</string>
+
+    <string name="download_receipt">Pakua Risiti</string>
+    <string name="downloading_receipt">Risiti inapakuliwa...</string>
+    <string name="receipt_downloaded">Risiti imehifadhiwa kwenye downloads</string>
+    <string name="view_receipt">Angalia Risiti</string>
+    <string name="order_receipt">Risiti ya Agizo</string>
+    <string name="order_id">ID ya Agizo</string>
+    <string name="date">Tarehe</string>
+    <string name="items">Bidhaa</string>
+    <string name="total">Jumla</string>
+    <string name="close">Funga</string>
+    <string name="description_label">Maelezo</string>
+
+    <!-- Products -->
+    <string name="chips_name">chips kuku</string>
+    <string name="chips_desc">Chips za dhahabu zilizopikwa vizuri na kuku mtamu wa kukaanga. Mchanganyiko wa asili ambao haushindwi kukuridhisha kila wakati.</string>
+    <string name="chips_yai_name">chips yai</string>
+    <string name="chips_yai_desc">Chakula pendwa cha mtaani Tanzania! Chips za dhahabu zilizochanganywa na mayai yaliyokolezwa viungo. Ni chakula kinachofariji roho yako.</string>
+    <string name="chips_regular_name">chips</string>
+    <string name="chips_regular_desc">Ukorofi wa asili. Rahisi, mbichi, na moto. Mwenzake kamili wa mlo wowote au kitafunio kinachoridhisha peke yake.</string>
+    <string name="chips_mshikaki_name">chips mshikaki</string>
+    <string name="chips_mshikaki_desc">Mchanganyiko bora. Furahia chips zetu zilizopikwa vizuri zikiwa zimeambatana na mishikaki ya nyama iliyokolezwa viungo na kuchomwa moto.</string>
+    <string name="mshikaki_name">mishikaki</string>
+    <string name="mshikaki_desc">Pata mlipuko wa ladha halisi. Vipande laini vya nyama ya hali ya juu, vilivyokolezwa na mchanganyiko wa siri wa viungo vya Kiswahili na kuchomwa vizuri.</string>
+    <string name="water_name">maji</string>
+    <string name="water_desc">Safi na yenye kuburudisha. Njia kamili ya kupata maji na kusafisha kinywa chako baada ya mlo wenye ladha.</string>
+
+    <!-- Categories -->
+    <string name="cat_sides">Pembeni</string>
+    <string name="cat_specialty">Maalum</string>
+    <string name="cat_main">Kuu</string>
+    <string name="cat_drinks">Vinywaji</string>
+
+    <string name="mapbox_access_token">YOUR_MAPBOX_ACCESS_TOKEN</string>
+    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+    <string name="continue_with_google">Endelea na Google</string>
+</resources>

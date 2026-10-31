@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Fast Food</string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="security">Security</string>
+    <string name="notifications_style">Notifications Style</string>
+    <string name="font_size">Font Size</string>
+    <string name="bold_text">Bold Text</string>
+    <string name="language">Language</string>
+    <string name="more">More</string>
+    <string name="customer_support">Customer Support</string>
+    <string name="about_fast_food">About Fast Food</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="english">English</string>
+    <string name="swahili">Swahili</string>
+    <string name="back">Back</string>
+    <string name="search_hint">Search delicious food...</string>
+    <string name="my_orders">My Orders</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="payment_methods">Payment Methods</string>
+    <string name="logout">Logout</string>
+    <string name="dark_mode">Dark Mode</string>
+
+    <!-- Checkout Section -->
+    <string name="finalize_order">Finalize Order</string>
+    <string name="delivery_details">Delivery Details</string>
+    <string name="full_name">Full Name</string>
+    <string name="location_area">Location / Area (e.g. Buza, Cheka)</string>
+    <string name="street_landmark">Street Name / Landmark</string>
+    <string name="house_unit">House Number / Unit (Optional)</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="mobile_payment">Mobile Payment (M-Pesa / Tigo Pesa / Airtel Money)</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="place_order">Place Order</string>
+    <string name="order_placed">Order Placed!</string>
+    <string name="order_success_msg">Your meal is being prepared and will be delivered soon.</string>
+    <string name="back_to_home">Back to Home</string>
+
+    <!-- Notifications -->
+    <string name="notif_order_placed_title">Order Placed Successfully</string>
+    <string name="notif_order_placed_msg">Your order for %d items has been received.</string>
+    <string name="notif_order_placed_full">Order Details:\nOrder ID: #%1$s\nTotal: TSH %2$s\nStatus: Preparing Your Food\n\nIf there is any inconvenience please contact with our customer care number 0612826255\n\nThank you for choosing Fast Food!</string>
+
+    <string name="download_receipt">Download Receipt</string>
+    <string name="downloading_receipt">Downloading receipt...</string>
+    <string name="receipt_downloaded">Receipt saved to downloads</string>
+    <string name="view_receipt">View Receipt</string>
+    <string name="order_receipt">Order Receipt</string>
+    <string name="order_id">Order ID</string>
+    <string name="date">Date</string>
+    <string name="items">Items</string>
+    <string name="total">Total</string>
+    <string name="close">Close</string>
+    <string name="description_label">Description</string>
+
+    <!-- Products -->
+    <string name="chips_name">chips kuku</string>
+    <string name="chips_desc">Crispy golden chips served with flavorful, deep-fried chicken. A classic combination that never fails to satisfy.</string>
+    <string name="chips_yai_name">chips yai</string>
+    <string name="chips_yai_desc">A legendary Tanzanian street food favorite! Crispy golden chips fused with fluffy, seasoned eggs. It\'s the comfort food your soul needs.</string>
+    <string name="chips_regular_name">chips</string>
+    <string name="chips_regular_desc">The classic crunch. Simple, fresh, and hot. The perfect companion to any meal or a satisfying snack on its own.</string>
+    <string name="chips_mshikaki_name">chips mshikaki</string>
+    <string name="chips_mshikaki_desc">The ultimate power duo. Savor our signature crispy chips paired with succulent, spice-marinated meat skewers grilled over an open flame.</string>
+    <string name="mshikaki_name">mishikaki</string>
+    <string name="mshikaki_desc">Experience a burst of authentic flavors. Tender chunks of premium meat, marinated in a secret blend of Swahili spices and grilled to smoky perfection.</string>
+    <string name="water_name">water</string>
+    <string name="water_desc">Pure, crisp, and refreshing. The perfect way to hydrate and cleanse your palate after a flavorful meal.</string>
+
+    <!-- Categories -->
+    <string name="cat_sides">Sides</string>
+    <string name="cat_specialty">Specialty</string>
+    <string name="cat_main">Main</string>
+    <string name="cat_drinks">Drinks</string>
+
+    <string name="mapbox_access_token">YOUR_MAPBOX_ACCESS_TOKEN</string>
+    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+    <string name="continue_with_google">Continue with Google</string>
+</resources>
