@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast Food - Home</title>
+  <title>Fast Food - Home & Restaurant Showcase</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 </head>
 <body class="dark-theme">
 
-  <!-- Shared Header Navigation -->
+  <!-- Navigation Bar -->
   <header class="navbar">
     <div class="nav-container">
       <a href="index.html" class="brand">
@@ -28,7 +28,7 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
           <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
         <a href="checkout.html" class="cart-btn">
@@ -39,57 +39,222 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero Banner -->
   <section class="hero-section">
     <div class="hero-container">
       <div class="hero-text">
-        <span class="badge">🔥 Hot & Fresh Delivery</span>
-        <h1>Delicious Fast Food Delivered To Your Doorstep</h1>
-        <p>Order fresh Chips Kuku, Chipsi Mayai, Mishikaki, and fresh juices with instant Mobile Money payment.</p>
+        <span class="badge">🔥 Fresh • Hot • Delicious</span>
+        <h1>Authentic Fast Food Delivered In 30 Minutes</h1>
+        <p>Enjoy Tanzanian classics including Chips Kuku, Chipsi Mayai, Mishikaki, and fresh juices made fresh to order.</p>
         <div class="hero-buttons">
-          <a href="menu.html" class="primary-btn"><i class="fa-solid fa-utensils"></i> Browse Full Menu</a>
-          <a href="contact.html" class="secondary-btn"><i class="fa-solid fa-phone"></i> Call Support</a>
+          <a href="menu.html" class="primary-btn"><i class="fa-solid fa-basket-shopping"></i> Order Online Now</a>
+          <a href="#location-section" class="secondary-btn"><i class="fa-solid fa-location-dot"></i> Visit Restaurant</a>
         </div>
       </div>
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=600&auto=format&fit=crop" alt="Fast Food Hero">
+        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=700&auto=format&fit=crop" alt="Fast Food Delicacies">
       </div>
     </div>
   </section>
 
-  <!-- Popular Specialties Section -->
+  <!-- 1. FOOD TYPES & CATEGORIES SECTION -->
   <section class="section-container">
     <div class="section-title">
-      <h2>Featured Dishes</h2>
-      <p>Handpicked customer favorites prepared fresh daily</p>
+      <h2>Food Categories Available</h2>
+      <p>Discover our wide variety of freshly prepared meals and beverages</p>
+    </div>
+
+    <div class="food-types-grid">
+      <div class="food-type-card">
+        <div class="food-type-icon"><i class="fa-solid fa-bowl-food"></i></div>
+        <h3>Main Dishes</h3>
+        <p>Chips Kuku, Chipsi Mayai, Chips Mishikaki prepared hot with fresh salad.</p>
+        <a href="menu.html" class="link-btn">Explore Main Dishes <i class="fa-solid fa-angle-right"></i></a>
+      </div>
+
+      <div class="food-type-card">
+        <div class="food-type-icon"><i class="fa-solid fa-drumstick-bite"></i></div>
+        <h3>Flame Grilled Skewers</h3>
+        <p>Tender beef mishikaki marinated in traditional spices and grilled over coals.</p>
+        <a href="menu.html" class="link-btn">Explore Skewers <i class="fa-solid fa-angle-right"></i></a>
+      </div>
+
+      <div class="food-type-card">
+        <div class="food-type-icon"><i class="fa-solid fa-french-fries"></i></div>
+        <h3>Sides & Snacks</h3>
+        <p>Crispy golden french fries, fried eggs, fresh salad, and chili kachumbari.</p>
+        <a href="menu.html" class="link-btn">Explore Sides <i class="fa-solid fa-angle-right"></i></a>
+      </div>
+
+      <div class="food-type-card">
+        <div class="food-type-icon"><i class="fa-solid fa-bottle-water"></i></div>
+        <h3>Fresh Drinks</h3>
+        <p>Natural squeezed mango juices, cold sodas, and chilled mineral water.</p>
+        <a href="menu.html" class="link-btn">Explore Drinks <i class="fa-solid fa-angle-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED MENU DISHES -->
+  <section class="section-container">
+    <div class="section-title">
+      <h2>Customer Favorites</h2>
+      <p>Our top selling dishes loved by foodies in Dar es Salaam</p>
     </div>
 
     <div class="products-grid" id="featuredGrid">
-      <!-- Loaded dynamically via app.js -->
+      <!-- Dynamically rendered via app.js -->
     </div>
 
     <div class="text-center margin-top">
-      <a href="menu.html" class="secondary-btn">View All Items in Menu <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="menu.html" class="primary-btn">View Full Interactive Menu <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </section>
 
-  <!-- Features Grid -->
+  <!-- 2. SERVICES AVAILABLE SECTION -->
   <section class="features-section">
+    <div class="section-title">
+      <h2>Services Available</h2>
+      <p>We provide multiple convenient ways to enjoy your favorite food</p>
+    </div>
+
     <div class="features-grid">
       <div class="feature-card">
-        <i class="fa-solid fa-bolt feature-icon"></i>
-        <h3>Super Fast Delivery</h3>
-        <p>Your meal is prepared hot and delivered to your location in under 30 minutes.</p>
+        <i class="fa-solid fa-truck-fast feature-icon"></i>
+        <h3>Doorstep Home Delivery</h3>
+        <p>Express 30-minute delivery to your home or office with temperature-sealed packaging.</p>
       </div>
+
       <div class="feature-card">
-        <i class="fa-solid fa-mobile-screen feature-icon"></i>
-        <h3>Easy Mobile Payment</h3>
-        <p>Pay conveniently using M-Pesa, Tigo Pesa, or Airtel Money via EasyPay.</p>
+        <i class="fa-solid fa-chair feature-icon"></i>
+        <h3>Dine-In Restaurant</h3>
+        <p>Cozy air-conditioned dining area with comfortable seating and friendly table service.</p>
       </div>
+
       <div class="feature-card">
-        <i class="fa-solid fa-shield-heart feature-icon"></i>
-        <h3>100% Quality Guaranteed</h3>
-        <p>Made with fresh ingredients, clean preparation, and hygienic packaging.</p>
+        <i class="fa-solid fa-bag-shopping feature-icon"></i>
+        <h3>Takeaway & Pickup</h3>
+        <p>Order online ahead of time and pick up your ready order without waiting in line.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fa-solid fa-mobile-screen-button feature-icon"></i>
+        <h3>Instant Mobile Payments</h3>
+        <p>Seamless checkout supporting M-Pesa, Tigo Pesa, and Airtel Money via EasyPay.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. RESTAURANT ENVIRONMENT & AMBIENCE SHOWCASE -->
+  <section class="section-container">
+    <div class="section-title">
+      <h2>Restaurant Environment & Ambience</h2>
+      <p>Take a look inside our clean, modern dining environment and hygienic kitchen</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop" alt="Dine-In Area">
+        <div class="gallery-overlay">
+          <span>Modern Dining Area</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop" alt="Hygienic Kitchen">
+        <div class="gallery-overlay">
+          <span>Open Clean Kitchen</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&auto=format&fit=crop" alt="Outdoor Seating">
+        <div class="gallery-overlay">
+          <span>Outdoor Garden Seating</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&auto=format&fit=crop" alt="Friendly Staff">
+        <div class="gallery-overlay">
+          <span>Friendly Hospitality</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. LOCATION & ADDRESS SECTION -->
+  <section class="location-section" id="location-section">
+    <div class="location-container">
+      <div class="location-info">
+        <span class="badge"><i class="fa-solid fa-map-pin"></i> Restaurant Location</span>
+        <h2>Visit Our Physical Location</h2>
+        <p>We are conveniently located in the heart of Dar es Salaam with easy access and ample parking.</p>
+
+        <div class="info-list">
+          <div class="info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Address Location</strong>
+              <p>Sinza Block C, Sam Nujoma Road, Dar es Salaam, Tanzania</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <strong>Opening Hours</strong>
+              <p>Monday - Sunday: 08:00 AM - 11:00 PM</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Customer Support & Orders</strong>
+              <p>Hotline: <strong>0612826255</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <a href="contact.html" class="primary-btn margin-top"><i class="fa-solid fa-paper-plane"></i> Contact Support</a>
+      </div>
+
+      <div class="location-card">
+        <div class="map-placeholder">
+          <i class="fa-solid fa-map-location-dot map-icon"></i>
+          <h3>FastFood Express Restaurant</h3>
+          <p>Sinza Block C, Dar es Salaam</p>
+          <span class="status-badge"><i class="fa-solid fa-circle"></i> Open Now for Delivery & Dine-In</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TESTIMONIALS REVIEWS SECTION -->
+  <section class="section-container">
+    <div class="section-title">
+      <h2>Customer Reviews</h2>
+      <p>What our satisfied customers say about our food and service</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p>"Best Chips Kuku in Sinza! Delivered hot and fresh in less than 25 minutes. M-Pesa payment was super fast!"</p>
+        <strong>- Asha Hassan</strong>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p>"The Mishikaki skewers are extremely tender and delicious. Very clean restaurant ambience and helpful staff."</p>
+        <strong>- Juma Rashid</strong>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p>"Chipsi Mayai is authentic and seasoned perfectly. Ordering online via web was effortless."</p>
+        <strong>- Emmanuel K.</strong>
       </div>
     </div>
   </section>
@@ -99,17 +264,18 @@
     <div class="footer-container">
       <div class="footer-col">
         <h3>FastFood Express</h3>
-        <p>Providing the best fast food delivery experience in Tanzania.</p>
+        <p>Providing delicious fast food and express doorstep delivery across Dar es Salaam, Tanzania.</p>
       </div>
       <div class="footer-col">
-        <h4>Quick Links</h4>
+        <h4>Quick Navigation</h4>
         <a href="index.html">Home</a>
         <a href="menu.html">Menu</a>
         <a href="checkout.html">Checkout</a>
         <a href="contact.html">Support</a>
       </div>
       <div class="footer-col">
-        <h4>Contact Support</h4>
+        <h4>Restaurant Location</h4>
+        <p><i class="fa-solid fa-location-dot"></i> Sinza Block C, Dar es Salaam</p>
         <p><i class="fa-solid fa-phone"></i> 0612826255</p>
         <p><i class="fa-solid fa-envelope"></i> support@fastfood.co.tz</p>
       </div>
