@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast Food - Checkout</title>
+  <title>Fast Food - Express Checkout</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
   <header class="navbar">
     <div class="nav-container">
       <a href="index.html" class="brand">
-        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <div class="logo-icon float-anim"><i class="fa-solid fa-utensils"></i></div>
         <span class="brand-name">Fast<span>Food</span></span>
       </a>
 
@@ -35,28 +35,45 @@
     </div>
   </header>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <h1><i class="fa-solid fa-credit-card"></i> Order Checkout</h1>
-    <p>Provide your delivery address and choose your payment method.</p>
+  <!-- Page Header & Steps Indicator -->
+  <section class="page-header animate-fadeIn">
+    <h1><i class="fa-solid fa-credit-card"></i> Express Checkout</h1>
+    <p>Complete your address and mobile payment to confirm order delivery.</p>
+
+    <div class="checkout-steps">
+      <div class="step-item active">
+        <div class="step-num"><i class="fa-solid fa-location-dot"></i></div>
+        <span>1. Address</span>
+      </div>
+      <div class="step-line active"></div>
+      <div class="step-item active">
+        <div class="step-num"><i class="fa-solid fa-mobile-screen"></i></div>
+        <span>2. Payment</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-item">
+        <div class="step-num"><i class="fa-solid fa-check"></i></div>
+        <span>3. Delivery</span>
+      </div>
+    </div>
   </section>
 
   <!-- Checkout Grid Layout -->
-  <main class="section-container">
+  <main class="section-container animate-fadeInUp">
     <div class="checkout-layout">
 
       <!-- Left Column: Delivery & Payment Form -->
-      <div class="checkout-card">
-        <h2><i class="fa-solid fa-user-gear"></i> Delivery & Payment Details</h2>
+      <div class="checkout-card hover-glow">
+        <h2><i class="fa-solid fa-user-gear"></i> Delivery & Payment Information</h2>
         <form id="checkoutPageForm">
           <div class="form-group">
             <label for="custName"><i class="fa-solid fa-user"></i> Full Name</label>
-            <input type="text" id="custName" required placeholder="John Doe">
+            <input type="text" id="custName" required placeholder="e.g. John Doe">
           </div>
 
           <div class="form-group">
-            <label for="custLocation"><i class="fa-solid fa-location-dot"></i> Delivery Address / Location</label>
-            <input type="text" id="custLocation" required placeholder="Dar es Salaam, Sinza Block C, House 12">
+            <label for="custLocation"><i class="fa-solid fa-location-dot"></i> Delivery Address & House/Block</label>
+            <input type="text" id="custLocation" required placeholder="e.g. Sinza Block C, House 12, Dar es Salaam">
           </div>
 
           <div class="form-group">
@@ -65,39 +82,40 @@
           </div>
 
           <div class="form-group">
-            <label><i class="fa-solid fa-wallet"></i> Payment Method</label>
+            <label><i class="fa-solid fa-wallet"></i> Choose Payment Method</label>
             <div class="payment-options">
-              <label class="payment-card active" id="cardMobile">
+              <label class="payment-card active pulse-card" id="cardMobile">
                 <input type="radio" name="paymentMethod" value="Mobile Payment" checked>
                 <div class="payment-info">
                   <strong><i class="fa-solid fa-mobile-screen"></i> EasyPay Mobile Money</strong>
-                  <small>Instant prompt to M-Pesa, Tigo Pesa, or Airtel Money</small>
+                  <small>Instant prompt sent to M-Pesa, Tigo Pesa, or Airtel Money</small>
                 </div>
+                <span class="payment-badge">Recommended</span>
               </label>
 
               <label class="payment-card" id="cardCash">
                 <input type="radio" name="paymentMethod" value="Cash on Delivery">
                 <div class="payment-info">
                   <strong><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery</strong>
-                  <small>Pay cash upon food arrival</small>
+                  <small>Pay in cash when food is delivered</small>
                 </div>
               </label>
             </div>
           </div>
 
           <div class="form-group" id="mobilePhoneGroup">
-            <label for="payPhone"><i class="fa-solid fa-sim-card"></i> Payment Phone Number (For EasyPay USSD Prompt)</label>
+            <label for="payPhone"><i class="fa-solid fa-sim-card"></i> Payment Phone Number (For EasyPay Prompt)</label>
             <input type="tel" id="payPhone" placeholder="07XXXXXXXX">
           </div>
 
-          <button type="submit" class="submit-order-btn" id="submitOrderBtn">
-            <i class="fa-solid fa-paper-plane"></i> Place Order Now
+          <button type="submit" class="submit-order-btn pulse-hover" id="submitOrderBtn">
+            <i class="fa-solid fa-lock"></i> Securely Place Order Now
           </button>
         </form>
       </div>
 
       <!-- Right Column: Order Summary -->
-      <div class="checkout-card summary-card">
+      <div class="checkout-card summary-card hover-glow">
         <h2><i class="fa-solid fa-basket-shopping"></i> Order Summary</h2>
         <div class="checkout-items" id="checkoutItemsList">
           <!-- Dynamically filled by app.js -->
@@ -105,28 +123,28 @@
 
         <div class="cart-summary margin-top">
           <div class="summary-row">
-            <span>Subtotal</span>
+            <span>Food Items Subtotal</span>
             <span id="checkoutSubtotal">TSH 0</span>
           </div>
           <div class="summary-row">
-            <span>Delivery Fee</span>
+            <span>Express Delivery Fee</span>
             <span>TSH 2,000</span>
           </div>
           <div class="summary-row total">
-            <span>Total Payable</span>
+            <span>Total Payable Amount</span>
             <span id="checkoutTotal">TSH 2,000</span>
           </div>
         </div>
 
         <div class="support-box">
-          <i class="fa-solid fa-headset"></i> Need help with your order? Call <strong>0612826255</strong>
+          <i class="fa-solid fa-headset"></i> Need support? Call <strong>0612826255</strong>
         </div>
       </div>
 
     </div>
   </main>
 
-  <!-- Toast Notification Container -->
+  <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- Footer -->
