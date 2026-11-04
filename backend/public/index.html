@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast Food - Order Online</title>
+  <title>Fast Food - Home</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,165 +12,111 @@
 </head>
 <body class="dark-theme">
 
-  <!-- Navigation Bar -->
+  <!-- Shared Header Navigation -->
   <header class="navbar">
     <div class="nav-container">
-      <div class="brand">
+      <a href="index.html" class="brand">
         <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
         <span class="brand-name">Fast<span>Food</span></span>
-      </div>
+      </a>
 
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="searchInput" placeholder="Search delicious food...">
-      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="menu.html" class="nav-link"><i class="fa-solid fa-utensils"></i> Menu</a>
+        <a href="checkout.html" class="nav-link"><i class="fa-solid fa-truck-fast"></i> Checkout</a>
+        <a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a>
+      </nav>
 
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
           <i class="fa-solid fa-sun" id="themeIcon"></i>
         </button>
-        <button class="cart-btn" id="openCartBtn">
+        <a href="checkout.html" class="cart-btn">
           <i class="fa-solid fa-shopping-bag"></i>
           <span class="cart-badge" id="cartBadge">0</span>
-        </button>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Banner -->
-  <section class="hero-banner">
-    <div class="hero-content">
-      <span class="badge">🔥 Hot & Fresh</span>
-      <h1>Tasty Food Delivered Fast to Your Doorstep</h1>
-      <p>Order your favorite meals, snacks, and drinks with instant Mobile Money payment.</p>
-      <a href="#menu-section" class="cta-btn">Explore Menu <i class="fa-solid fa-arrow-down"></i></a>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-text">
+        <span class="badge">🔥 Hot & Fresh Delivery</span>
+        <h1>Delicious Fast Food Delivered To Your Doorstep</h1>
+        <p>Order fresh Chips Kuku, Chipsi Mayai, Mishikaki, and fresh juices with instant Mobile Money payment.</p>
+        <div class="hero-buttons">
+          <a href="menu.html" class="primary-btn"><i class="fa-solid fa-utensils"></i> Browse Full Menu</a>
+          <a href="contact.html" class="secondary-btn"><i class="fa-solid fa-phone"></i> Call Support</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=600&auto=format&fit=crop" alt="Fast Food Hero">
+      </div>
     </div>
   </section>
 
-  <!-- Category Filter Bar -->
-  <main class="main-container" id="menu-section">
-    <div class="category-scroll">
-      <button class="category-chip active" data-category="All">
-        <i class="fa-solid fa-border-all"></i> All
-      </button>
-      <button class="category-chip" data-category="Main">
-        <i class="fa-solid fa-bowl-food"></i> Main Dishes
-      </button>
-      <button class="category-chip" data-category="Sides">
-        <i class="fa-solid fa-french-fries"></i> Sides
-      </button>
-      <button class="category-chip" data-category="Specialty">
-        <i class="fa-solid fa-drumstick-bite"></i> Specialty
-      </button>
-      <button class="category-chip" data-category="Drinks">
-        <i class="fa-solid fa-bottle-water"></i> Drinks
-      </button>
+  <!-- Popular Specialties Section -->
+  <section class="section-container">
+    <div class="section-title">
+      <h2>Featured Dishes</h2>
+      <p>Handpicked customer favorites prepared fresh daily</p>
     </div>
 
-    <!-- Product Grid -->
-    <div class="products-grid" id="productsGrid">
-      <!-- Products dynamically loaded via app.js -->
-    </div>
-  </main>
-
-  <!-- Sliding Shopping Cart Drawer -->
-  <div class="cart-drawer-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer">
-    <div class="cart-header">
-      <h2><i class="fa-solid fa-bag-shopping"></i> Your Cart</h2>
-      <button class="close-btn" id="closeCartBtn">&times;</button>
+    <div class="products-grid" id="featuredGrid">
+      <!-- Loaded dynamically via app.js -->
     </div>
 
-    <div class="cart-items" id="cartItemsContainer">
-      <p class="empty-cart-msg">Your cart is empty. Add some delicious food!</p>
+    <div class="text-center margin-top">
+      <a href="menu.html" class="secondary-btn">View All Items in Menu <i class="fa-solid fa-arrow-right"></i></a>
     </div>
+  </section>
 
-    <div class="cart-footer">
-      <div class="cart-summary">
-        <div class="summary-row">
-          <span>Subtotal</span>
-          <span id="subtotalText">TSH 0</span>
-        </div>
-        <div class="summary-row">
-          <span>Delivery Fee</span>
-          <span id="deliveryFeeText">TSH 2,000</span>
-        </div>
-        <div class="summary-row total">
-          <span>Total</span>
-          <span id="totalText">TSH 2,000</span>
-        </div>
+  <!-- Features Grid -->
+  <section class="features-section">
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fa-solid fa-bolt feature-icon"></i>
+        <h3>Super Fast Delivery</h3>
+        <p>Your meal is prepared hot and delivered to your location in under 30 minutes.</p>
       </div>
-      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
-    </div>
-  </aside>
-
-  <!-- Checkout Modal -->
-  <div class="modal-overlay" id="checkoutModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h2><i class="fa-solid fa-truck-fast"></i> Delivery Details & Checkout</h2>
-        <button class="close-btn" id="closeCheckoutBtn">&times;</button>
+      <div class="feature-card">
+        <i class="fa-solid fa-mobile-screen feature-icon"></i>
+        <h3>Easy Mobile Payment</h3>
+        <p>Pay conveniently using M-Pesa, Tigo Pesa, or Airtel Money via EasyPay.</p>
       </div>
-
-      <form id="checkoutForm">
-        <div class="form-group">
-          <label for="custName"><i class="fa-solid fa-user"></i> Full Name</label>
-          <input type="text" id="custName" required placeholder="John Doe">
-        </div>
-
-        <div class="form-group">
-          <label for="custLocation"><i class="fa-solid fa-location-dot"></i> Delivery Location</label>
-          <input type="text" id="custLocation" required placeholder="Dar es Salaam, Sinza Block C">
-        </div>
-
-        <div class="form-group">
-          <label for="custPhone"><i class="fa-solid fa-phone"></i> Contact Phone Number</label>
-          <input type="tel" id="custPhone" required placeholder="07XXXXXXXX">
-        </div>
-
-        <div class="form-group">
-          <label><i class="fa-solid fa-credit-card"></i> Payment Method</label>
-          <div class="payment-options">
-            <label class="payment-card active">
-              <input type="radio" name="paymentMethod" value="Mobile Payment" checked>
-              <div class="payment-info">
-                <strong><i class="fa-solid fa-mobile-screen"></i> Mobile Money</strong>
-                <small>M-Pesa / Tigo Pesa / Airtel Money</small>
-              </div>
-            </label>
-            <label class="payment-card">
-              <input type="radio" name="paymentMethod" value="Cash on Delivery">
-              <div class="payment-info">
-                <strong><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery</strong>
-                <small>Pay upon receiving food</small>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group" id="mobilePhoneGroup">
-          <label for="payPhone"><i class="fa-solid fa-sim-card"></i> Payment Phone Number (EasyPay prompt)</label>
-          <input type="tel" id="payPhone" placeholder="07XXXXXXXX">
-        </div>
-
-        <div class="checkout-total-banner">
-          <span>Total Amount:</span>
-          <strong id="modalTotalText">TSH 0</strong>
-        </div>
-
-        <button type="submit" class="submit-order-btn" id="submitOrderBtn">
-          Confirm Order
-        </button>
-      </form>
+      <div class="feature-card">
+        <i class="fa-solid fa-shield-heart feature-icon"></i>
+        <h3>100% Quality Guaranteed</h3>
+        <p>Made with fresh ingredients, clean preparation, and hygienic packaging.</p>
+      </div>
     </div>
-  </div>
-
-  <!-- Toast Notification Container -->
-  <div class="toast-container" id="toastContainer"></div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2026 Fast Food Express. All rights reserved. | Support: <strong>0612826255</strong></p>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>FastFood Express</h3>
+        <p>Providing the best fast food delivery experience in Tanzania.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="contact.html">Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Support</h4>
+        <p><i class="fa-solid fa-phone"></i> 0612826255</p>
+        <p><i class="fa-solid fa-envelope"></i> support@fastfood.co.tz</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 FastFood Express. All rights reserved.
+    </div>
   </footer>
 
   <script src="app.js"></script>

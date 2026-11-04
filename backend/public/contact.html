@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Food - Customer Support</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Header Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="brand-name">Fast<span>Food</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="menu.html" class="nav-link"><i class="fa-solid fa-utensils"></i> Menu</a>
+        <a href="checkout.html" class="nav-link"><i class="fa-solid fa-truck-fast"></i> Checkout</a>
+        <a href="contact.html" class="nav-link active"><i class="fa-solid fa-headset"></i> Support</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1><i class="fa-solid fa-headset"></i> Customer Support</h1>
+    <p>We are available 24/7 to assist you with orders, deliveries, or payments.</p>
+  </section>
+
+  <!-- Contact Layout -->
+  <main class="section-container">
+    <div class="contact-layout">
+      <!-- Contact Cards -->
+      <div class="contact-info-card">
+        <i class="fa-solid fa-phone contact-icon"></i>
+        <h3>Call Us Directly</h3>
+        <p>Customer Support Helpline:</p>
+        <strong>0612826255</strong>
+      </div>
+
+      <div class="contact-info-card">
+        <i class="fa-solid fa-clock contact-icon"></i>
+        <h3>Operating Hours</h3>
+        <p>Monday - Sunday</p>
+        <strong>08:00 AM - 11:00 PM</strong>
+      </div>
+
+      <div class="contact-info-card">
+        <i class="fa-solid fa-location-dot contact-icon"></i>
+        <h3>Delivery Zones</h3>
+        <p>Fast delivery available across:</p>
+        <strong>Dar es Salaam & Surrounding Areas</strong>
+      </div>
+    </div>
+
+    <!-- Send Message Form -->
+    <div class="contact-form-card margin-top">
+      <h2><i class="fa-solid fa-envelope"></i> Send Us a Message</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="contactName"><i class="fa-solid fa-user"></i> Your Name</label>
+          <input type="text" id="contactName" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="contactPhone"><i class="fa-solid fa-phone"></i> Phone Number</label>
+          <input type="tel" id="contactPhone" required placeholder="07XXXXXXXX">
+        </div>
+        <div class="form-group">
+          <label for="contactMsg"><i class="fa-solid fa-message"></i> Message</label>
+          <textarea id="contactMsg" rows="4" required placeholder="Type your message or inquiry..."></textarea>
+        </div>
+        <button type="submit" class="submit-order-btn">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>FastFood Express</h3>
+        <p>Reliable online food delivery in Tanzania.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="contact.html">Support</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 FastFood Express. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

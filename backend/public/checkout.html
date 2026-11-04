@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Food - Checkout</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Header Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="brand-name">Fast<span>Food</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="menu.html" class="nav-link"><i class="fa-solid fa-utensils"></i> Menu</a>
+        <a href="checkout.html" class="nav-link active"><i class="fa-solid fa-truck-fast"></i> Checkout</a>
+        <a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1><i class="fa-solid fa-credit-card"></i> Order Checkout</h1>
+    <p>Provide your delivery address and choose your payment method.</p>
+  </section>
+
+  <!-- Checkout Grid Layout -->
+  <main class="section-container">
+    <div class="checkout-layout">
+
+      <!-- Left Column: Delivery & Payment Form -->
+      <div class="checkout-card">
+        <h2><i class="fa-solid fa-user-gear"></i> Delivery & Payment Details</h2>
+        <form id="checkoutPageForm">
+          <div class="form-group">
+            <label for="custName"><i class="fa-solid fa-user"></i> Full Name</label>
+            <input type="text" id="custName" required placeholder="John Doe">
+          </div>
+
+          <div class="form-group">
+            <label for="custLocation"><i class="fa-solid fa-location-dot"></i> Delivery Address / Location</label>
+            <input type="text" id="custLocation" required placeholder="Dar es Salaam, Sinza Block C, House 12">
+          </div>
+
+          <div class="form-group">
+            <label for="custPhone"><i class="fa-solid fa-phone"></i> Contact Phone Number</label>
+            <input type="tel" id="custPhone" required placeholder="07XXXXXXXX">
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-wallet"></i> Payment Method</label>
+            <div class="payment-options">
+              <label class="payment-card active" id="cardMobile">
+                <input type="radio" name="paymentMethod" value="Mobile Payment" checked>
+                <div class="payment-info">
+                  <strong><i class="fa-solid fa-mobile-screen"></i> EasyPay Mobile Money</strong>
+                  <small>Instant prompt to M-Pesa, Tigo Pesa, or Airtel Money</small>
+                </div>
+              </label>
+
+              <label class="payment-card" id="cardCash">
+                <input type="radio" name="paymentMethod" value="Cash on Delivery">
+                <div class="payment-info">
+                  <strong><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery</strong>
+                  <small>Pay cash upon food arrival</small>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" id="mobilePhoneGroup">
+            <label for="payPhone"><i class="fa-solid fa-sim-card"></i> Payment Phone Number (For EasyPay USSD Prompt)</label>
+            <input type="tel" id="payPhone" placeholder="07XXXXXXXX">
+          </div>
+
+          <button type="submit" class="submit-order-btn" id="submitOrderBtn">
+            <i class="fa-solid fa-paper-plane"></i> Place Order Now
+          </button>
+        </form>
+      </div>
+
+      <!-- Right Column: Order Summary -->
+      <div class="checkout-card summary-card">
+        <h2><i class="fa-solid fa-basket-shopping"></i> Order Summary</h2>
+        <div class="checkout-items" id="checkoutItemsList">
+          <!-- Dynamically filled by app.js -->
+        </div>
+
+        <div class="cart-summary margin-top">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="checkoutSubtotal">TSH 0</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery Fee</span>
+            <span>TSH 2,000</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total Payable</span>
+            <span id="checkoutTotal">TSH 2,000</span>
+          </div>
+        </div>
+
+        <div class="support-box">
+          <i class="fa-solid fa-headset"></i> Need help with your order? Call <strong>0612826255</strong>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>FastFood Express</h3>
+        <p>Reliable online food ordering in Tanzania.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="contact.html">Support</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 FastFood Express. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

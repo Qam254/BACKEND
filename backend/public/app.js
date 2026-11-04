@@ -1,5 +1,5 @@
 /**
- * Fast Food Express Single Page Web Application
+ * Fast Food Express Multi-Page Application Engine
  */
 
 const PRODUCTS = [
@@ -58,64 +58,96 @@ let cart = JSON.parse(localStorage.getItem('fastfood_cart')) || [];
 let activeCategory = 'All';
 let searchQuery = '';
 
-// DOM Elements
-const productsGrid = document.getElementById('productsGrid');
-const searchInput = document.getElementById('searchInput');
-const categoryChips = document.querySelectorAll('.category-chip');
-const cartBadge = document.getElementById('cartBadge');
-const cartDrawer = document.getElementById('cartDrawer');
-const cartOverlay = document.getElementById('cartOverlay');
-const openCartBtn = document.getElementById('openCartBtn');
-const closeCartBtn = document.getElementById('closeCartBtn');
-const cartItemsContainer = document.getElementById('cartItemsContainer');
-const subtotalText = document.getElementById('subtotalText');
-const deliveryFeeText = document.getElementById('deliveryFeeText');
-const totalText = document.getElementById('totalText');
-const checkoutBtn = document.getElementById('checkoutBtn');
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-
-// Checkout Modal
-const checkoutModal = document.getElementById('checkoutModal');
-const closeCheckoutBtn = document.getElementById('closeCheckoutBtn');
-const checkoutForm = document.getElementById('checkoutForm');
-const modalTotalText = document.getElementById('modalTotalText');
-const payPhoneGroup = document.getElementById('mobilePhoneGroup');
-const paymentCards = document.querySelectorAll('.payment-card');
-const submitOrderBtn = document.getElementById('submitOrderBtn');
-
-// Initialize
+// Page Initialization
 document.addEventListener('DOMContentLoaded', () => {
-  renderProducts();
-  updateCartUI();
-  setupEventListeners();
+  initTheme();
+  updateCartBadge();
+  initPage();
+  setupSharedEvents();
 });
 
-// Render Product Cards
-function renderProducts() {
-  const filtered = PRODUCTS.filter(product => {
-    const matchesCategory = (activeCategory === 'All') || (product.category === activeCategory);
-    const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          product.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+function initTheme() {
+  const savedTheme = localStorage.getItem('fastfood_theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  }
+  const themeIcon = document.getElementById('themeIcon');
+  if (themeIcon) {
+    themeIcon.className = document.body.classList.contains('light-theme') ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+  }
+}
 
-  if (filtered.length === 0) {
-    productsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 40px;">No delicious food found matching your search!</p>`;
+function setupSharedEvents() {
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      localStorage.setItem('fastfood_theme', isLight ? 'light' : 'dark');
+      const themeIcon = document.getElementById('themeIcon');
+      if (themeIcon) themeIcon.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    });
+  }
+
+  const openCartBtn = document.getElementById('openCartBtn');
+  const closeCartBtn = document.getElementById('closeCartBtn');
+  const cartOverlay = document.getElementById('cartOverlay');
+
+  if (openCartBtn && closeCartBtn && cartOverlay) {
+    openCartBtn.addEventListener('click', toggleCart);
+    closeCartBtn.addEventListener('click', toggleCart);
+    cartOverlay.addEventListener('click', toggleCart);
+  }
+}
+
+function initPage() {
+  // Page 1: Home Page
+  const featuredGrid = document.getElementById('featuredGrid');
+  if (featuredGrid) {
+    renderGrid(featuredGrid, PRODUCTS.slice(0, 4));
+  }
+
+  // Page 2: Full Menu Page
+  const menuGrid = document.getElementById('menuGrid');
+  if (menuGrid) {
+    renderMenuPage(menuGrid);
+  }
+
+  // Page 3: Checkout Page
+  const checkoutItemsList = document.getElementById('checkoutItemsList');
+  if (checkoutItemsList) {
+    renderCheckoutPage();
+  }
+
+  // Page 5: Contact Page
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Message sent successfully! Support will contact you shortly.');
+      contactForm.reset();
+    });
+  }
+}
+
+// Render Featured / Menu Grid
+function renderGrid(container, items) {
+  if (items.length === 0) {
+    container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 40px;">No food items found matching your criteria.</p>`;
     return;
   }
 
-  productsGrid.innerHTML = filtered.map(product => `
+  container.innerHTML = items.map(p => `
     <div class="product-card">
       <div class="product-img-box">
-        <img src="${product.imageUrl}" alt="${product.title}">
+        <img src="${p.imageUrl}" alt="${p.title}">
       </div>
       <div class="product-card-body">
-        <h3 class="product-title">${product.title}</h3>
-        <p class="product-desc">${product.description}</p>
+        <h3 class="product-title">${p.title}</h3>
+        <p class="product-desc">${p.description}</p>
         <div class="product-footer">
-          <span class="product-price">TSH ${product.price.toLocaleString()}</span>
-          <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">
+          <span class="product-price">TSH ${p.price.toLocaleString()}</span>
+          <button class="add-to-cart-btn" onclick="addToCart('${p.id}')">
             <i class="fa-solid fa-plus"></i> Add
           </button>
         </div>
@@ -124,50 +156,37 @@ function renderProducts() {
   `).join('');
 }
 
-// Event Listeners
-function setupEventListeners() {
-  searchInput.addEventListener('input', (e) => {
-    searchQuery = e.target.value.trim();
-    renderProducts();
-  });
+function renderMenuPage(container) {
+  const searchInput = document.getElementById('searchInput');
+  const categoryChips = document.querySelectorAll('.category-chip');
+
+  function updateMenu() {
+    const filtered = PRODUCTS.filter(p => {
+      const matchCat = (activeCategory === 'All') || (p.category === activeCategory);
+      const matchSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          p.description.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchCat && matchSearch;
+    });
+    renderGrid(container, filtered);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      updateMenu();
+    });
+  }
 
   categoryChips.forEach(chip => {
     chip.addEventListener('click', () => {
       categoryChips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       activeCategory = chip.dataset.category;
-      renderProducts();
+      updateMenu();
     });
   });
 
-  openCartBtn.addEventListener('click', toggleCart);
-  closeCartBtn.addEventListener('click', toggleCart);
-  cartOverlay.addEventListener('click', toggleCart);
-
-  themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-theme');
-    const isLight = document.body.classList.contains('light-theme');
-    themeIcon.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-  });
-
-  checkoutBtn.addEventListener('click', () => {
-    toggleCart();
-    toggleCheckoutModal();
-  });
-
-  closeCheckoutBtn.addEventListener('click', toggleCheckoutModal);
-
-  paymentCards.forEach(card => {
-    card.addEventListener('click', () => {
-      paymentCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      const radio = card.querySelector('input[type="radio"]');
-      radio.checked = true;
-      payPhoneGroup.style.display = radio.value === 'Mobile Payment' ? 'block' : 'none';
-    });
-  });
-
-  checkoutForm.addEventListener('submit', handleCheckoutSubmit);
+  updateMenu();
 }
 
 // Cart Management
@@ -183,7 +202,8 @@ function addToCart(productId) {
   }
 
   saveCart();
-  updateCartUI();
+  updateCartBadge();
+  updateCartDrawerUI();
   showToast(`Added ${product.title} to cart!`);
 }
 
@@ -197,36 +217,54 @@ function updateQuantity(productId, delta) {
   }
 
   saveCart();
-  updateCartUI();
+  updateCartBadge();
+  updateCartDrawerUI();
+
+  // If on checkout page, refresh checkout page UI too
+  const checkoutItemsList = document.getElementById('checkoutItemsList');
+  if (checkoutItemsList) renderCheckoutPage();
 }
 
 function saveCart() {
   localStorage.setItem('fastfood_cart', JSON.stringify(cart));
 }
 
-function updateCartUI() {
-  const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartBadge.innerText = totalItemCount;
+function updateCartBadge() {
+  const badges = document.querySelectorAll('.cart-badge');
+  const count = cart.reduce((sum, i) => sum + i.quantity, 0);
+  badges.forEach(b => b.innerText = count);
+}
+
+function toggleCart() {
+  const cartDrawer = document.getElementById('cartDrawer');
+  const cartOverlay = document.getElementById('cartOverlay');
+  if (cartDrawer && cartOverlay) {
+    cartDrawer.classList.toggle('active');
+    cartOverlay.classList.toggle('active');
+    updateCartDrawerUI();
+  }
+}
+
+function updateCartDrawerUI() {
+  const container = document.getElementById('cartItemsContainer');
+  const subtotalText = document.getElementById('subtotalText');
+  const totalText = document.getElementById('totalText');
+  if (!container) return;
 
   if (cart.length === 0) {
-    cartItemsContainer.innerHTML = `<p class="empty-cart-msg">Your cart is empty. Add some delicious food!</p>`;
-    subtotalText.innerText = `TSH 0`;
-    totalText.innerText = `TSH 0`;
-    modalTotalText.innerText = `TSH 0`;
-    checkoutBtn.disabled = true;
+    container.innerHTML = `<p class="empty-cart-msg">Your cart is empty.</p>`;
+    if (subtotalText) subtotalText.innerText = 'TSH 0';
+    if (totalText) totalText.innerText = 'TSH 0';
     return;
   }
 
-  checkoutBtn.disabled = false;
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const subtotal = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
   const total = subtotal + DELIVERY_FEE;
 
-  subtotalText.innerText = `TSH ${subtotal.toLocaleString()}`;
-  deliveryFeeText.innerText = `TSH ${DELIVERY_FEE.toLocaleString()}`;
-  totalText.innerText = `TSH ${total.toLocaleString()}`;
-  modalTotalText.innerText = `TSH ${total.toLocaleString()}`;
+  if (subtotalText) subtotalText.innerText = `TSH ${subtotal.toLocaleString()}`;
+  if (totalText) totalText.innerText = `TSH ${total.toLocaleString()}`;
 
-  cartItemsContainer.innerHTML = cart.map(item => `
+  container.innerHTML = cart.map(item => `
     <div class="cart-item">
       <img src="${item.imageUrl}" alt="${item.title}">
       <div class="cart-item-details">
@@ -242,77 +280,113 @@ function updateCartUI() {
   `).join('');
 }
 
-function toggleCart() {
-  cartDrawer.classList.toggle('active');
-  cartOverlay.classList.toggle('active');
-}
+// Render Checkout Page
+function renderCheckoutPage() {
+  const checkoutItemsList = document.getElementById('checkoutItemsList');
+  const checkoutSubtotal = document.getElementById('checkoutSubtotal');
+  const checkoutTotal = document.getElementById('checkoutTotal');
+  const checkoutPageForm = document.getElementById('checkoutPageForm');
+  const mobilePhoneGroup = document.getElementById('mobilePhoneGroup');
+  const cardMobile = document.getElementById('cardMobile');
+  const cardCash = document.getElementById('cardCash');
 
-function toggleCheckoutModal() {
-  checkoutModal.classList.toggle('active');
-}
+  if (!checkoutItemsList) return;
 
-// Checkout Submit Handler
-async function handleCheckoutSubmit(e) {
-  e.preventDefault();
+  if (cart.length === 0) {
+    checkoutItemsList.innerHTML = `<p class="empty-cart-msg">Your cart is empty. <a href="menu.html">Go to Menu</a> to add food!</p>`;
+    checkoutSubtotal.innerText = 'TSH 0';
+    checkoutTotal.innerText = 'TSH 0';
+    return;
+  }
 
-  const name = document.getElementById('custName').value.trim();
-  const location = document.getElementById('custLocation').value.trim();
-  const phone = document.getElementById('custPhone').value.trim();
-  const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-  const payPhone = document.getElementById('payPhone').value.trim() || phone;
-
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const subtotal = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
   const total = subtotal + DELIVERY_FEE;
 
-  submitOrderBtn.disabled = true;
-  submitOrderBtn.innerText = 'Processing Order...';
+  checkoutSubtotal.innerText = `TSH ${subtotal.toLocaleString()}`;
+  checkoutTotal.innerText = `TSH ${total.toLocaleString()}`;
 
-  try {
-    if (paymentMethod === 'Mobile Payment') {
-      const response = await fetch('/api/payments/pay', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          reference: 'COL20260109LINK01XYZ',
-          payerPhone: payPhone,
-          payerName: name,
-          amount: total,
-          idempotencyKey: `WEB_ORD_${Date.now()}`
-        })
-      });
+  checkoutItemsList.innerHTML = cart.map(item => `
+    <div class="checkout-item">
+      <div>
+        <strong>${item.title}</strong> x ${item.quantity}
+      </div>
+      <div class="product-price">TSH ${(item.price * item.quantity).toLocaleString()}</div>
+    </div>
+  `).join('');
 
-      const data = await response.json();
+  if (cardMobile && cardCash) {
+    cardMobile.addEventListener('click', () => {
+      cardMobile.classList.add('active');
+      cardCash.classList.remove('active');
+      cardMobile.querySelector('input').checked = true;
+      if (mobilePhoneGroup) mobilePhoneGroup.style.display = 'block';
+    });
 
-      if (response.ok && data.success) {
-        showToast('Payment initiated! Check your phone for USSD prompt.');
-      } else {
-        showToast(data.message || 'Payment request initiated.');
+    cardCash.addEventListener('click', () => {
+      cardCash.classList.add('active');
+      cardMobile.classList.remove('active');
+      cardCash.querySelector('input').checked = true;
+      if (mobilePhoneGroup) mobilePhoneGroup.style.display = 'none';
+    });
+  }
+
+  if (checkoutPageForm) {
+    checkoutPageForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (cart.length === 0) {
+        showToast('Your cart is empty!');
+        return;
       }
-    }
 
-    showToast('🎉 Order placed successfully! Food is on the way.');
-    cart = [];
-    saveCart();
-    updateCartUI();
-    toggleCheckoutModal();
-    checkoutForm.reset();
+      const name = document.getElementById('custName').value.trim();
+      const location = document.getElementById('custLocation').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const payPhone = document.getElementById('payPhone') ? document.getElementById('payPhone').value.trim() || phone : phone;
 
-  } catch (error) {
-    console.error('Order error:', error);
-    showToast('Order received! Thank you for ordering.');
-    cart = [];
-    saveCart();
-    updateCartUI();
-    toggleCheckoutModal();
-  } finally {
-    submitOrderBtn.disabled = false;
-    submitOrderBtn.innerText = 'Confirm Order';
+      const submitBtn = document.getElementById('submitOrderBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing Payment...';
+
+      try {
+        if (paymentMethod === 'Mobile Payment') {
+          const response = await fetch('/api/payments/pay', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              reference: 'COL20260109LINK01XYZ',
+              payerPhone: payPhone,
+              payerName: name,
+              amount: total,
+              idempotencyKey: `WEB_ORD_${Date.now()}`
+            })
+          });
+
+          const data = await response.json();
+          if (data.message) showToast(data.message);
+        }
+
+        cart = [];
+        saveCart();
+        updateCartBadge();
+        window.location.href = 'order-success.html';
+
+      } catch (err) {
+        console.error('Checkout error:', err);
+        cart = [];
+        saveCart();
+        updateCartBadge();
+        window.location.href = 'order-success.html';
+      }
+    });
   }
 }
 
 // Toast Notifications
 function showToast(message) {
   const container = document.getElementById('toastContainer');
+  if (!container) return;
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.innerText = message;

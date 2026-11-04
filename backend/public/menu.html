@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Food - Full Menu</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Header Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="brand-name">Fast<span>Food</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="menu.html" class="nav-link active"><i class="fa-solid fa-utensils"></i> Menu</a>
+        <a href="checkout.html" class="nav-link"><i class="fa-solid fa-truck-fast"></i> Checkout</a>
+        <a href="contact.html" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="cart-btn" id="openCartBtn">
+          <i class="fa-solid fa-shopping-bag"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1><i class="fa-solid fa-utensils"></i> Explore Our Menu</h1>
+    <p>Select your favorite food, customize order, and proceed to checkout.</p>
+  </section>
+
+  <!-- Search & Category Filters -->
+  <main class="section-container">
+    <div class="filter-bar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search menu items...">
+      </div>
+
+      <div class="category-scroll">
+        <button class="category-chip active" data-category="All">
+          <i class="fa-solid fa-border-all"></i> All
+        </button>
+        <button class="category-chip" data-category="Main">
+          <i class="fa-solid fa-bowl-food"></i> Main Dishes
+        </button>
+        <button class="category-chip" data-category="Sides">
+          <i class="fa-solid fa-french-fries"></i> Sides
+        </button>
+        <button class="category-chip" data-category="Specialty">
+          <i class="fa-solid fa-drumstick-bite"></i> Specialty
+        </button>
+        <button class="category-chip" data-category="Drinks">
+          <i class="fa-solid fa-bottle-water"></i> Drinks
+        </button>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="menuGrid">
+      <!-- Dynamically populated via app.js -->
+    </div>
+  </main>
+
+  <!-- Cart Drawer Overlay -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2><i class="fa-solid fa-bag-shopping"></i> Your Shopping Bag</h2>
+      <button class="close-btn" id="closeCartBtn">&times;</button>
+    </div>
+
+    <div class="cart-items" id="cartItemsContainer">
+      <p class="empty-cart-msg">Your cart is empty.</p>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotalText">TSH 0</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery Fee</span>
+          <span id="deliveryFeeText">TSH 2,000</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total Amount</span>
+          <span id="totalText">TSH 2,000</span>
+        </div>
+      </div>
+      <a href="checkout.html" class="checkout-btn" id="checkoutBtnLink">Proceed to Checkout</a>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>FastFood Express</h3>
+        <p>Order fresh food online with instant delivery.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="contact.html">Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Support</h4>
+        <p><i class="fa-solid fa-phone"></i> 0612826255</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 FastFood Express. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
