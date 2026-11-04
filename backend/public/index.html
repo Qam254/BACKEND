@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast Food Express - All-in-One Web Application</title>
+  <title>Fast Food Express - Web Application</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ALL-IN-ONE CSS STYLING & ANIMATIONS */
+    /* ALL-IN-ONE CSS STYLING & PAGE VISIBILITY ENGINE */
     :root {
       --primary-color: #d84315;
       --primary-hover: #bf360c;
@@ -54,7 +54,7 @@
 
     /* Keyframe Animations */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(25px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -68,9 +68,19 @@
       50% { box-shadow: 0 0 25px rgba(216, 67, 21, 0.6); }
     }
 
-    .animate-fadeInUp { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     .float-anim { animation: floatAnimation 3s ease-in-out infinite; }
     .pulse-card { animation: pulseGlow 2.5s infinite; }
+
+    /* SINGLE PAGE TAB SWITCHER RULES: HIDE NON-ACTIVE SECTIONS */
+    .page-section {
+      display: none;
+      width: 100%;
+    }
+
+    .page-section.active {
+      display: block;
+      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
 
     /* Header Navbar */
     .navbar {
@@ -96,6 +106,7 @@
       align-items: center;
       gap: 10px;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .logo-icon {
@@ -135,6 +146,7 @@
       gap: 8px;
       padding: 8px 16px;
       border-radius: 20px;
+      cursor: pointer;
     }
 
     .nav-link:hover, .nav-link.active {
@@ -287,6 +299,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      cursor: pointer;
     }
 
     .food-type-card:hover { transform: translateY(-8px); }
@@ -657,17 +670,17 @@
   <!-- Header Navigation -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="#home" class="brand">
+      <a onclick="showPage('home')" class="brand">
         <div class="logo-icon float-anim"><i class="fa-solid fa-utensils"></i></div>
         <span class="brand-name">Fast<span>Food</span></span>
       </a>
 
+      <!-- TABBED NAVIGATION LINKS -->
       <nav class="nav-links">
-        <a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#menu" class="nav-link"><i class="fa-solid fa-utensils"></i> Food Menu</a>
-        <a href="#services" class="nav-link"><i class="fa-solid fa-bell"></i> Services</a>
-        <a href="#checkout" class="nav-link"><i class="fa-solid fa-truck-fast"></i> Checkout</a>
-        <a href="#support" class="nav-link"><i class="fa-solid fa-headset"></i> Support</a>
+        <a onclick="showPage('home')" class="nav-link active" data-page="home"><i class="fa-solid fa-house"></i> Home</a>
+        <a onclick="showPage('menu')" class="nav-link" data-page="menu"><i class="fa-solid fa-utensils"></i> Food Menu</a>
+        <a onclick="showPage('checkout')" class="nav-link" data-page="checkout"><i class="fa-solid fa-truck-fast"></i> Checkout</a>
+        <a onclick="showPage('support')" class="nav-link" data-page="support"><i class="fa-solid fa-headset"></i> Support</a>
       </nav>
 
       <div class="nav-actions">
@@ -682,261 +695,277 @@
     </div>
   </header>
 
-  <!-- 1. HOME SECTION -->
-  <section class="hero-section" id="home">
-    <div class="hero-container animate-fadeInUp">
-      <div class="hero-text">
-        <span class="badge">🔥 Fresh • Hot • Delicious</span>
-        <h1>Delicious Fast Food Delivered In 30 Mins</h1>
-        <p>Order fresh Chips Kuku, Chipsi Mayai, Mishikaki, and fresh juices with instant Mobile Money payment.</p>
-        <div class="hero-buttons">
-          <a href="#menu" class="primary-btn"><i class="fa-solid fa-utensils"></i> View Food Menu</a>
-          <a href="#checkout" class="secondary-btn"><i class="fa-solid fa-cart-shopping"></i> Go To Checkout</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=700&auto=format&fit=crop" alt="Fast Food Hero">
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOD CATEGORIES TYPES SHOWCASE -->
-  <section class="section-container">
-    <div class="section-title">
-      <h2>Food Categories Available</h2>
-      <p>Select a food category to jump directly to your cravings</p>
-    </div>
-
-    <div class="food-types-grid">
-      <div class="food-type-card" onclick="filterMenuCategory('Main')">
-        <div class="food-type-icon"><i class="fa-solid fa-bowl-food"></i></div>
-        <h3>Main Dishes</h3>
-        <p>Chips Kuku, Chipsi Mayai, Chips Mishikaki prepared hot with fresh kachumbari.</p>
-      </div>
-
-      <div class="food-type-card" onclick="filterMenuCategory('Specialty')">
-        <div class="food-type-icon"><i class="fa-solid fa-drumstick-bite"></i></div>
-        <h3>Flame Grilled Skewers</h3>
-        <p>Tender beef mishikaki marinated in traditional spices and grilled over coals.</p>
-      </div>
-
-      <div class="food-type-card" onclick="filterMenuCategory('Sides')">
-        <div class="food-type-icon"><i class="fa-solid fa-french-fries"></i></div>
-        <h3>Sides & Snacks</h3>
-        <p>Crispy golden french fries, fried eggs, and spicy kachumbari salad.</p>
-      </div>
-
-      <div class="food-type-card" onclick="filterMenuCategory('Drinks')">
-        <div class="food-type-icon"><i class="fa-solid fa-bottle-water"></i></div>
-        <h3>Fresh Beverages</h3>
-        <p>Natural squeezed mango juices, cold sodas, and chilled mineral water.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. MENU SECTION -->
-  <section class="section-container" id="menu">
-    <div class="section-title">
-      <h2>Interactive Food Menu</h2>
-      <p>Search, filter, and add food items directly to your order</p>
-    </div>
-
-    <div class="filter-bar">
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="searchInput" placeholder="Search delicious food...">
-      </div>
-
-      <div class="category-scroll">
-        <button class="category-chip active" data-category="All"><i class="fa-solid fa-border-all"></i> All</button>
-        <button class="category-chip" data-category="Main"><i class="fa-solid fa-bowl-food"></i> Main Dishes</button>
-        <button class="category-chip" data-category="Sides"><i class="fa-solid fa-french-fries"></i> Sides</button>
-        <button class="category-chip" data-category="Specialty"><i class="fa-solid fa-drumstick-bite"></i> Specialty</button>
-        <button class="category-chip" data-category="Drinks"><i class="fa-solid fa-bottle-water"></i> Drinks</button>
-      </div>
-    </div>
-
-    <!-- Dynamic Menu Grid -->
-    <div class="products-grid" id="menuGrid"></div>
-  </section>
-
-  <!-- 3. SERVICES SECTION -->
-  <section class="features-section" id="services">
-    <div class="section-title">
-      <h2>Services Available</h2>
-      <p>Discover how we deliver the best fast food experience</p>
-    </div>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <i class="fa-solid fa-truck-fast feature-icon"></i>
-        <h3>Doorstep Home Delivery</h3>
-        <p>30-minute express delivery straight to your location in heat-preserved packaging.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fa-solid fa-chair feature-icon"></i>
-        <h3>Dine-In Restaurant</h3>
-        <p>Clean, air-conditioned dining area with cozy seating and fast table service.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fa-solid fa-bag-shopping feature-icon"></i>
-        <h3>Takeaway & Pickup</h3>
-        <p>Order ahead on web and pick up your hot meal without waiting in queue.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fa-solid fa-mobile-screen-button feature-icon"></i>
-        <h3>EasyPay Mobile Money</h3>
-        <p>Pay conveniently using M-Pesa, Tigo Pesa, or Airtel Money with real-time prompt.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESTAURANT ENVIRONMENT SHOWCASE -->
-  <section class="section-container">
-    <div class="section-title">
-      <h2>Restaurant Environment & Ambience</h2>
-      <p>Experience our hygienic kitchen and modern dining atmosphere</p>
-    </div>
-
-    <div class="gallery-grid">
-      <div class="gallery-card">
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop" alt="Dine-In Area">
-        <div class="gallery-overlay"><span>Modern Dining Room</span></div>
-      </div>
-      <div class="gallery-card">
-        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop" alt="Kitchen">
-        <div class="gallery-overlay"><span>Hygienic Open Kitchen</span></div>
-      </div>
-      <div class="gallery-card">
-        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&auto=format&fit=crop" alt="Outdoor Seating">
-        <div class="gallery-overlay"><span>Outdoor Garden Seating</span></div>
-      </div>
-      <div class="gallery-card">
-        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&auto=format&fit=crop" alt="Hospitality">
-        <div class="gallery-overlay"><span>Friendly Service Team</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESTAURANT LOCATION SECTION -->
-  <section class="location-section" id="location">
-    <div class="location-container">
-      <div class="location-info">
-        <span class="badge"><i class="fa-solid fa-map-pin"></i> Restaurant Location</span>
-        <h2>Visit Our Physical Location</h2>
-        <p>Located conveniently in Dar es Salaam with easy access and ample parking.</p>
-
-        <div class="info-list">
-          <div class="info-item">
-            <i class="fa-solid fa-location-dot"></i>
-            <div><strong>Address Location</strong><p>Sinza Block C, Sam Nujoma Road, Dar es Salaam, Tanzania</p></div>
-          </div>
-          <div class="info-item">
-            <i class="fa-solid fa-clock"></i>
-            <div><strong>Opening Hours</strong><p>Monday - Sunday: 08:00 AM - 11:00 PM</p></div>
-          </div>
-          <div class="info-item">
-            <i class="fa-solid fa-phone"></i>
-            <div><strong>Customer Hotline</strong><p>0612826255</p></div>
+  <!-- ========================================== -->
+  <!-- 1. HOME PAGE CONTENT ONLY (#home-section)  -->
+  <!-- ========================================== -->
+  <div class="page-section active" id="home-section">
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="hero-text">
+          <span class="badge">🔥 Fresh • Hot • Delicious</span>
+          <h1>Delicious Fast Food Delivered In 30 Mins</h1>
+          <p>Order fresh Chips Kuku, Chipsi Mayai, Mishikaki, and fresh juices with instant Mobile Money payment.</p>
+          <div class="hero-buttons">
+            <button onclick="showPage('menu')" class="primary-btn"><i class="fa-solid fa-utensils"></i> Order Online Now</button>
+            <button onclick="showPage('support')" class="secondary-btn"><i class="fa-solid fa-headset"></i> Call Support</button>
           </div>
         </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=700&auto=format&fit=crop" alt="Fast Food Hero">
+        </div>
+      </div>
+    </section>
+
+    <!-- Food Categories Showcase -->
+    <section class="section-container">
+      <div class="section-title">
+        <h2>Food Categories Available</h2>
+        <p>Explore our tasty options and jump straight to ordering</p>
       </div>
 
-      <div class="location-card">
-        <i class="fa-solid fa-map-location-dot" style="font-size:50px; color:var(--accent-color); margin-bottom:12px;"></i>
-        <h3>FastFood Express Restaurant</h3>
-        <p>Sinza Block C, Dar es Salaam</p>
-        <span class="status-badge"><i class="fa-solid fa-circle"></i> Open Now for Delivery & Dine-In</span>
+      <div class="food-types-grid">
+        <div class="food-type-card" onclick="filterMenuCategory('Main')">
+          <div class="food-type-icon"><i class="fa-solid fa-bowl-food"></i></div>
+          <h3>Main Dishes</h3>
+          <p>Chips Kuku, Chipsi Mayai, Chips Mishikaki prepared hot with fresh kachumbari.</p>
+        </div>
+
+        <div class="food-type-card" onclick="filterMenuCategory('Specialty')">
+          <div class="food-type-icon"><i class="fa-solid fa-drumstick-bite"></i></div>
+          <h3>Flame Grilled Skewers</h3>
+          <p>Tender beef mishikaki marinated in traditional spices and grilled over coals.</p>
+        </div>
+
+        <div class="food-type-card" onclick="filterMenuCategory('Sides')">
+          <div class="food-type-icon"><i class="fa-solid fa-french-fries"></i></div>
+          <h3>Sides & Snacks</h3>
+          <p>Crispy golden french fries, fried eggs, and spicy kachumbari salad.</p>
+        </div>
+
+        <div class="food-type-card" onclick="filterMenuCategory('Drinks')">
+          <div class="food-type-icon"><i class="fa-solid fa-bottle-water"></i></div>
+          <h3>Fresh Beverages</h3>
+          <p>Natural squeezed mango juices, cold sodas, and chilled mineral water.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 4. CHECKOUT SECTION -->
-  <section class="section-container" id="checkout">
-    <div class="section-title">
-      <h2>Express Order Checkout</h2>
-      <p>Review your food items, fill address, and confirm payment</p>
-    </div>
+    <!-- Services Section -->
+    <section class="features-section">
+      <div class="section-title">
+        <h2>Services Available</h2>
+        <p>Discover how we deliver the best fast food experience</p>
+      </div>
 
-    <div class="checkout-layout">
-      <!-- Form -->
-      <div class="checkout-card pulse-card">
-        <h2><i class="fa-solid fa-user-gear"></i> Delivery & Payment Info</h2>
-        <form id="checkoutForm">
-          <div class="form-group">
-            <label for="custName"><i class="fa-solid fa-user"></i> Full Name</label>
-            <input type="text" id="custName" required placeholder="John Doe">
-          </div>
-          <div class="form-group">
-            <label for="custLocation"><i class="fa-solid fa-location-dot"></i> Delivery Address</label>
-            <input type="text" id="custLocation" required placeholder="Dar es Salaam, Sinza Block C">
-          </div>
-          <div class="form-group">
-            <label for="custPhone"><i class="fa-solid fa-phone"></i> Contact Number</label>
-            <input type="tel" id="custPhone" required placeholder="07XXXXXXXX">
-          </div>
-          <div class="form-group">
-            <label><i class="fa-solid fa-wallet"></i> Payment Method</label>
-            <div class="payment-options">
-              <label class="payment-card active" id="cardMobile">
-                <input type="radio" name="paymentMethod" value="Mobile Payment" checked>
-                <div><strong>Mobile Money (EasyPay)</strong><br><small>Instant prompt to M-Pesa / Tigo / Airtel</small></div>
-              </label>
-              <label class="payment-card" id="cardCash">
-                <input type="radio" name="paymentMethod" value="Cash on Delivery">
-                <div><strong>Cash on Delivery</strong><br><small>Pay cash upon delivery</small></div>
-              </label>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fa-solid fa-truck-fast feature-icon"></i>
+          <h3>Doorstep Delivery</h3>
+          <p>30-minute express delivery straight to your location in heat-preserved packaging.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-chair feature-icon"></i>
+          <h3>Dine-In Dining</h3>
+          <p>Clean, air-conditioned dining area with cozy seating and fast table service.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-bag-shopping feature-icon"></i>
+          <h3>Takeaway & Pickup</h3>
+          <p>Order ahead on web and pick up your hot meal without waiting in queue.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-mobile-screen-button feature-icon"></i>
+          <h3>EasyPay Mobile Money</h3>
+          <p>Pay conveniently using M-Pesa, Tigo Pesa, or Airtel Money with real-time prompt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Restaurant Location Section -->
+    <section class="location-section">
+      <div class="location-container">
+        <div class="location-info">
+          <span class="badge"><i class="fa-solid fa-map-pin"></i> Restaurant Location</span>
+          <h2>Visit Our Physical Location</h2>
+          <p>Located conveniently in Dar es Salaam with easy access and ample parking.</p>
+
+          <div class="info-list">
+            <div class="info-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div><strong>Address Location</strong><p>Sinza Block C, Sam Nujoma Road, Dar es Salaam, Tanzania</p></div>
+            </div>
+            <div class="info-item">
+              <i class="fa-solid fa-clock"></i>
+              <div><strong>Opening Hours</strong><p>Monday - Sunday: 08:00 AM - 11:00 PM</p></div>
+            </div>
+            <div class="info-item">
+              <i class="fa-solid fa-phone"></i>
+              <div><strong>Customer Hotline</strong><p>0612826255</p></div>
             </div>
           </div>
-          <div class="form-group" id="payPhoneGroup">
-            <label for="payPhone"><i class="fa-solid fa-sim-card"></i> Payment Phone Number</label>
-            <input type="tel" id="payPhone" placeholder="07XXXXXXXX">
-          </div>
-          <button type="submit" class="submit-order-btn" id="submitOrderBtn"><i class="fa-solid fa-paper-plane"></i> Confirm & Place Order</button>
-        </form>
-      </div>
+        </div>
 
-      <!-- Summary -->
-      <div class="checkout-card">
-        <h2><i class="fa-solid fa-basket-shopping"></i> Order Items</h2>
-        <div class="checkout-items" id="checkoutItemsList"></div>
-        <div style="margin-top:20px; border-top:1px solid var(--border-color); padding-top:12px;">
-          <div class="summary-row"><span>Subtotal</span><span id="subtotalVal">TSH 0</span></div>
-          <div class="summary-row"><span>Delivery Fee</span><span>TSH 2,000</span></div>
-          <div class="summary-row total"><span>Total Payable</span><span id="totalVal">TSH 2,000</span></div>
+        <div class="location-card">
+          <i class="fa-solid fa-map-location-dot" style="font-size:50px; color:var(--accent-color); margin-bottom:12px;"></i>
+          <h3>FastFood Express Restaurant</h3>
+          <p>Sinza Block C, Dar es Salaam</p>
+          <span class="status-badge"><i class="fa-solid fa-circle"></i> Open Now for Delivery & Dine-In</span>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 5. CUSTOMER CARE & SUPPORT SECTION -->
-  <section class="section-container" id="support">
-    <div class="section-title">
-      <h2>Customer Support & Feedback</h2>
-      <p>Have questions? Reach out to our 24/7 dedicated support team</p>
-    </div>
+    <!-- Ambience Gallery Section -->
+    <section class="section-container">
+      <div class="section-title">
+        <h2>Restaurant Environment & Ambience</h2>
+        <p>Experience our hygienic kitchen and modern dining atmosphere</p>
+      </div>
 
-    <div class="contact-layout">
-      <div class="contact-info-card">
-        <i class="fa-solid fa-phone contact-icon"></i>
-        <h3>Call Us Directly</h3>
-        <p>Customer Support Helpline:</p>
-        <strong style="font-size: 20px; color:var(--accent-color);">0612826255</strong>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop" alt="Dine-In">
+          <div class="gallery-overlay"><span>Modern Dining Room</span></div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop" alt="Kitchen">
+          <div class="gallery-overlay"><span>Hygienic Open Kitchen</span></div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&auto=format&fit=crop" alt="Outdoor">
+          <div class="gallery-overlay"><span>Outdoor Garden Seating</span></div>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&auto=format&fit=crop" alt="Hospitality">
+          <div class="gallery-overlay"><span>Friendly Service Team</span></div>
+        </div>
       </div>
-      <div class="contact-info-card">
-        <i class="fa-solid fa-clock contact-icon"></i>
-        <h3>Operating Hours</h3>
-        <p>Monday - Sunday</p>
-        <strong>08:00 AM - 11:00 PM</strong>
+    </section>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. MENU PAGE CONTENT ONLY (#menu-section)  -->
+  <!-- ========================================== -->
+  <div class="page-section" id="menu-section">
+    <section class="section-container">
+      <div class="section-title">
+        <h2>Interactive Food Menu</h2>
+        <p>Search, filter, and add food items directly to your order</p>
       </div>
-      <div class="contact-info-card">
-        <i class="fa-solid fa-envelope contact-icon"></i>
-        <h3>Email Inquiry</h3>
-        <p>Direct Support Email:</p>
-        <strong>support@fastfood.co.tz</strong>
+
+      <div class="filter-bar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="searchInput" placeholder="Search delicious food...">
+        </div>
+
+        <div class="category-scroll">
+          <button class="category-chip active" data-category="All"><i class="fa-solid fa-border-all"></i> All</button>
+          <button class="category-chip" data-category="Main"><i class="fa-solid fa-bowl-food"></i> Main Dishes</button>
+          <button class="category-chip" data-category="Sides"><i class="fa-solid fa-french-fries"></i> Sides</button>
+          <button class="category-chip" data-category="Specialty"><i class="fa-solid fa-drumstick-bite"></i> Specialty</button>
+          <button class="category-chip" data-category="Drinks"><i class="fa-solid fa-bottle-water"></i> Drinks</button>
+        </div>
       </div>
-    </div>
-  </section>
+
+      <!-- Dynamic Menu Grid -->
+      <div class="products-grid" id="menuGrid"></div>
+    </section>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- 3. CHECKOUT PAGE CONTENT ONLY (#checkout-section) -->
+  <!-- ============================================== -->
+  <div class="page-section" id="checkout-section">
+    <section class="section-container">
+      <div class="section-title">
+        <h2>Express Order Checkout</h2>
+        <p>Review your food items, fill address, and confirm payment</p>
+      </div>
+
+      <div class="checkout-layout">
+        <!-- Form -->
+        <div class="checkout-card pulse-card">
+          <h2><i class="fa-solid fa-user-gear"></i> Delivery & Payment Information</h2>
+          <form id="checkoutForm">
+            <div class="form-group">
+              <label for="custName"><i class="fa-solid fa-user"></i> Full Name</label>
+              <input type="text" id="custName" required placeholder="e.g. John Doe">
+            </div>
+            <div class="form-group">
+              <label for="custLocation"><i class="fa-solid fa-location-dot"></i> Delivery Address</label>
+              <input type="text" id="custLocation" required placeholder="e.g. Dar es Salaam, Sinza Block C">
+            </div>
+            <div class="form-group">
+              <label for="custPhone"><i class="fa-solid fa-phone"></i> Contact Number</label>
+              <input type="tel" id="custPhone" required placeholder="07XXXXXXXX">
+            </div>
+            <div class="form-group">
+              <label><i class="fa-solid fa-wallet"></i> Choose Payment Method</label>
+              <div class="payment-options">
+                <label class="payment-card active" id="cardMobile">
+                  <input type="radio" name="paymentMethod" value="Mobile Payment" checked>
+                  <div><strong>Mobile Money (EasyPay)</strong><br><small>Instant prompt to M-Pesa / Tigo / Airtel</small></div>
+                </label>
+                <label class="payment-card" id="cardCash">
+                  <input type="radio" name="paymentMethod" value="Cash on Delivery">
+                  <div><strong>Cash on Delivery</strong><br><small>Pay cash upon delivery</small></div>
+                </label>
+              </div>
+            </div>
+            <div class="form-group" id="payPhoneGroup">
+              <label for="payPhone"><i class="fa-solid fa-sim-card"></i> Payment Phone Number</label>
+              <input type="tel" id="payPhone" placeholder="07XXXXXXXX">
+            </div>
+            <button type="submit" class="submit-order-btn" id="submitOrderBtn"><i class="fa-solid fa-paper-plane"></i> Confirm & Place Order</button>
+          </form>
+        </div>
+
+        <!-- Summary -->
+        <div class="checkout-card">
+          <h2><i class="fa-solid fa-basket-shopping"></i> Order Items</h2>
+          <div class="checkout-items" id="checkoutItemsList"></div>
+          <div style="margin-top:20px; border-top:1px solid var(--border-color); padding-top:12px;">
+            <div class="summary-row"><span>Subtotal</span><span id="subtotalVal">TSH 0</span></div>
+            <div class="summary-row"><span>Delivery Fee</span><span>TSH 2,000</span></div>
+            <div class="summary-row total"><span>Total Payable</span><span id="totalVal">TSH 2,000</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============================================= -->
+  <!-- 4. SUPPORT PAGE CONTENT ONLY (#support-section) -->
+  <!-- ============================================= -->
+  <div class="page-section" id="support-section">
+    <section class="section-container">
+      <div class="section-title">
+        <h2>Customer Care & Support</h2>
+        <p>Have questions? Reach out to our 24/7 dedicated support team</p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-info-card">
+          <i class="fa-solid fa-phone contact-icon"></i>
+          <h3>Call Us Directly</h3>
+          <p>Customer Support Helpline:</p>
+          <strong style="font-size: 20px; color:var(--accent-color);">0612826255</strong>
+        </div>
+        <div class="contact-info-card">
+          <i class="fa-solid fa-clock contact-icon"></i>
+          <h3>Operating Hours</h3>
+          <p>Monday - Sunday</p>
+          <strong>08:00 AM - 11:00 PM</strong>
+        </div>
+        <div class="contact-info-card">
+          <i class="fa-solid fa-envelope contact-icon"></i>
+          <h3>Email Inquiry</h3>
+          <p>Direct Support Email:</p>
+          <strong>support@fastfood.co.tz</strong>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- CART DRAWER -->
   <div class="cart-drawer-overlay" id="cartOverlay"></div>
@@ -949,7 +978,7 @@
     <div class="cart-footer">
       <div class="summary-row"><span>Subtotal</span><span id="drawerSubtotal">TSH 0</span></div>
       <div class="summary-row total"><span>Total</span><span id="drawerTotal">TSH 2,000</span></div>
-      <a href="#checkout" class="primary-btn" onclick="toggleCart()" style="width:100%; text-align:center; margin-top:12px; justify-content:center;">Go to Checkout</a>
+      <button class="primary-btn" onclick="toggleCart(); showPage('checkout');" style="width:100%; justify-content:center; margin-top:12px;">Go to Checkout</button>
     </div>
   </aside>
 
@@ -964,11 +993,11 @@
         <p>Providing fresh fast food and express delivery in Tanzania.</p>
       </div>
       <div>
-        <h4>Quick Links</h4>
-        <p><a href="#home" style="color:var(--text-secondary); text-decoration:none;">Home</a></p>
-        <p><a href="#menu" style="color:var(--text-secondary); text-decoration:none;">Food Menu</a></p>
-        <p><a href="#checkout" style="color:var(--text-secondary); text-decoration:none;">Checkout</a></p>
-        <p><a href="#support" style="color:var(--text-secondary); text-decoration:none;">Support</a></p>
+        <h4>Quick Navigation</h4>
+        <p><a onclick="showPage('home')" style="color:var(--text-secondary); cursor:pointer;">Home</a></p>
+        <p><a onclick="showPage('menu')" style="color:var(--text-secondary); cursor:pointer;">Food Menu</a></p>
+        <p><a onclick="showPage('checkout')" style="color:var(--text-secondary); cursor:pointer;">Checkout</a></p>
+        <p><a onclick="showPage('support')" style="color:var(--text-secondary); cursor:pointer;">Support</a></p>
       </div>
       <div>
         <h4>Support Contact</h4>
@@ -979,7 +1008,7 @@
   </footer>
 
   <script>
-    /* ALL-IN-ONE JAVASCRIPT APP ENGINE */
+    /* ALL-IN-ONE SINGLE PAGE APPLICATION SWITCHER ENGINE */
     const PRODUCTS = [
       { id: "chips_kuku", title: "Chips Kuku", description: "Crispy french fries served with succulent fried chicken.", price: 8000, category: "Main", imageUrl: "https://images.unsplash.com/photo-1562967914-608f82629710?w=500&auto=format&fit=crop" },
       { id: "chips_mishikaki", title: "Chips Mishikaki", description: "Golden fries paired with savory beef skewers.", price: 7000, category: "Specialty", imageUrl: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&auto=format&fit=crop" },
@@ -1000,6 +1029,29 @@
       updateUI();
       setupEvents();
     });
+
+    /* SINGLE PAGE TAB SWITCHER FUNCTION */
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      const targetSec = document.getElementById(`${pageId}-section`);
+      if (targetSec) {
+        targetSec.classList.add('active');
+      }
+
+      const targetLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
+      if (targetLink) {
+        targetLink.classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     function initTheme() {
       if (localStorage.getItem('fastfood_theme') === 'light') {
@@ -1071,7 +1123,7 @@
         else c.classList.remove('active');
       });
       renderMenu();
-      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+      showPage('menu');
     }
 
     function renderMenu() {
@@ -1175,7 +1227,7 @@
       const checkoutItemsList = document.getElementById('checkoutItemsList');
       if (checkoutItemsList) {
         if (cart.length === 0) {
-          checkoutItemsList.innerHTML = `<p style="color:var(--text-secondary); text-align:center;">No items in order. <a href="#menu" style="color:var(--primary-color);">Browse Menu</a></p>`;
+          checkoutItemsList.innerHTML = `<p style="color:var(--text-secondary); text-align:center;">No items in order. <a onclick="showPage('menu')" style="color:var(--primary-color); cursor:pointer;">Browse Menu</a></p>`;
         } else {
           checkoutItemsList.innerHTML = cart.map(i => `
             <div class="checkout-item">
@@ -1227,12 +1279,14 @@
         saveCart();
         updateUI();
         document.getElementById('checkoutForm').reset();
+        showPage('home');
 
       } catch (err) {
         showToast('Order received! Thank you.');
         cart = [];
         saveCart();
         updateUI();
+        showPage('home');
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Confirm & Place Order';
