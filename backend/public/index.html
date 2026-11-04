@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Food - Order Online</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="brand-name">Fast<span>Food</span></span>
+      </div>
+
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search delicious food...">
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Theme">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+        <button class="cart-btn" id="openCartBtn">
+          <i class="fa-solid fa-shopping-bag"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <span class="badge">🔥 Hot & Fresh</span>
+      <h1>Tasty Food Delivered Fast to Your Doorstep</h1>
+      <p>Order your favorite meals, snacks, and drinks with instant Mobile Money payment.</p>
+      <a href="#menu-section" class="cta-btn">Explore Menu <i class="fa-solid fa-arrow-down"></i></a>
+    </div>
+  </section>
+
+  <!-- Category Filter Bar -->
+  <main class="main-container" id="menu-section">
+    <div class="category-scroll">
+      <button class="category-chip active" data-category="All">
+        <i class="fa-solid fa-border-all"></i> All
+      </button>
+      <button class="category-chip" data-category="Main">
+        <i class="fa-solid fa-bowl-food"></i> Main Dishes
+      </button>
+      <button class="category-chip" data-category="Sides">
+        <i class="fa-solid fa-french-fries"></i> Sides
+      </button>
+      <button class="category-chip" data-category="Specialty">
+        <i class="fa-solid fa-drumstick-bite"></i> Specialty
+      </button>
+      <button class="category-chip" data-category="Drinks">
+        <i class="fa-solid fa-bottle-water"></i> Drinks
+      </button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="products-grid" id="productsGrid">
+      <!-- Products dynamically loaded via app.js -->
+    </div>
+  </main>
+
+  <!-- Sliding Shopping Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2><i class="fa-solid fa-bag-shopping"></i> Your Cart</h2>
+      <button class="close-btn" id="closeCartBtn">&times;</button>
+    </div>
+
+    <div class="cart-items" id="cartItemsContainer">
+      <p class="empty-cart-msg">Your cart is empty. Add some delicious food!</p>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotalText">TSH 0</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery Fee</span>
+          <span id="deliveryFeeText">TSH 2,000</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="totalText">TSH 2,000</span>
+        </div>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <!-- Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-truck-fast"></i> Delivery Details & Checkout</h2>
+        <button class="close-btn" id="closeCheckoutBtn">&times;</button>
+      </div>
+
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label for="custName"><i class="fa-solid fa-user"></i> Full Name</label>
+          <input type="text" id="custName" required placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="custLocation"><i class="fa-solid fa-location-dot"></i> Delivery Location</label>
+          <input type="text" id="custLocation" required placeholder="Dar es Salaam, Sinza Block C">
+        </div>
+
+        <div class="form-group">
+          <label for="custPhone"><i class="fa-solid fa-phone"></i> Contact Phone Number</label>
+          <input type="tel" id="custPhone" required placeholder="07XXXXXXXX">
+        </div>
+
+        <div class="form-group">
+          <label><i class="fa-solid fa-credit-card"></i> Payment Method</label>
+          <div class="payment-options">
+            <label class="payment-card active">
+              <input type="radio" name="paymentMethod" value="Mobile Payment" checked>
+              <div class="payment-info">
+                <strong><i class="fa-solid fa-mobile-screen"></i> Mobile Money</strong>
+                <small>M-Pesa / Tigo Pesa / Airtel Money</small>
+              </div>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="Cash on Delivery">
+              <div class="payment-info">
+                <strong><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery</strong>
+                <small>Pay upon receiving food</small>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="mobilePhoneGroup">
+          <label for="payPhone"><i class="fa-solid fa-sim-card"></i> Payment Phone Number (EasyPay prompt)</label>
+          <input type="tel" id="payPhone" placeholder="07XXXXXXXX">
+        </div>
+
+        <div class="checkout-total-banner">
+          <span>Total Amount:</span>
+          <strong id="modalTotalText">TSH 0</strong>
+        </div>
+
+        <button type="submit" class="submit-order-btn" id="submitOrderBtn">
+          Confirm Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Fast Food Express. All rights reserved. | Support: <strong>0612826255</strong></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -12,6 +12,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const axios = require('axios');
 const crypto = require('crypto');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,8 +30,13 @@ const BEEM_SOURCE_ADDR = process.env.BEEM_SOURCE_ADDR || 'INFO';
 const BEEM_URL = 'https://api.beem.africa/public/v1/send';
 
 // Security and Middleware
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false // Allows loading external fonts, icons & images on web frontend
+}));
 app.use(cors());
+
+// Serve Web Application static assets
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Parse JSON body while capturing the raw buffer for HMAC signature verification
 app.use(express.json({
